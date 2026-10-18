@@ -1,10 +1,11 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, interpolate, staticFile } from "remotion";
-import { FPS, SeriesProvider, palette } from "./theme";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
+import { SeriesProvider, palette } from "./theme";
+import { Sfx, Timing, createTimeline } from "./episodeKit";
 import { Layer, Phase } from "./components/Layer";
 import { Shot } from "./components/Shot";
 import { Hud, HudState } from "./components/Hud";
-import { Subtitles, Word } from "./components/Subtitles";
+import { Subtitles } from "./components/Subtitles";
 import { DayCard, RuleCard, TitleCard } from "./components/Cards";
 import { BarRow, BigText, InfographicBoard } from "./components/Board";
 import { StatusBoard } from "./components/StatusBoard";
@@ -14,46 +15,12 @@ import { Calendar, ConceptCard, CountBadge, LabelTag, NoticeCard, SourceNote, Ye
 import stateA from "../production/state-a.json";
 import timing from "../episodes/a-part-1/timing.json";
 
-type TWord = { w: string; start: number; end: number };
-type Beat = { id: string; start: number; end: number; words: TWord[] };
-
-const beats = Object.fromEntries((timing.beats as Beat[]).map((b) => [b.id, b])) as Record<string, Beat>;
-const norm = (w: string) => w.toLowerCase().replace(/[^a-z0-9-]/g, "");
-
-/** Absolute start time (s) of the nth occurrence of `word` in a beat. Re-run align-timing.py and this follows the voice-over. */
-const at = (id: string, word: string, nth = 1) => {
-  const hit = beats[id].words.filter((x) => norm(x.w) === norm(word))[nth - 1];
-  if (!hit) throw new Error(`word "${word}" #${nth} not found in beat ${id}`);
-  return hit.start;
-};
+const { B, at, subtitleWords, musicVolume } = createTimeline(
+  timing as Timing,
+  /^(money|name|test|lie|nothing|zero|build|sell)$/,
+);
 
 export const EPISODE_A1_SECONDS = timing.duration;
-
-/** One-shot sound effect at an absolute time (seconds). */
-const Sfx: React.FC<{ at: number; src: "thud" | "whoosh" | "stamp" | "tap"; volume?: number }> = ({
-  at: t,
-  src,
-  volume = 0.4,
-}) => (
-  <Sequence from={Math.round(t * FPS)} durationInFrames={Math.round(3 * FPS)} layout="none">
-    <Audio src={staticFile(`sfx/${src}.wav`)} volume={volume} />
-  </Sequence>
-);
-
-const MUSIC_VOLUME = 0.2;
-const musicVolume = (f: number) =>
-  MUSIC_VOLUME *
-  interpolate(f, [0, 2 * FPS, (timing.duration - 4) * FPS, timing.duration * FPS], [0, 1, 1, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-const ACCENT_WORDS = /^(money|name|test|lie|nothing|zero|build|sell)$/;
-const subtitleWords: Word[] = (timing.beats as Beat[]).flatMap((b) =>
-  b.words.map((x) => ({ ...x, accent: ACCENT_WORDS.test(norm(x.w)) })),
-);
-
-const B = beats;
 
 // Shot cuts land on the sentence they illustrate.
 const hookCut1 = at("hook", "you", 2); // "You have fifty thousand dollars..."
@@ -233,7 +200,7 @@ export const EpisodeA1: React.FC = () => (
       </Layer>
 
       {/* 8 Temptation and choice */}
-      <Layer from={B.temptation.start} to={tYouCan}><Shot file="A01_S13" bars={{ top: 170 / 1376, bottom: 146 / 1376 }} focusX={0.35} /></Layer>
+      <Layer from={B.temptation.start} to={tYouCan}><Shot file="A01_S13" focusX={0.35} /></Layer>
       <Layer from={tYouCan} to={B.temptation.end}><Shot file="A01_S14" /></Layer>
       <Layer from={tAgency} to={tYouCan} fade={0.25} overlay>
         <NoticeCard kicker="EMAIL" text="Full app in 6 weeks · $30,000" top={560} />

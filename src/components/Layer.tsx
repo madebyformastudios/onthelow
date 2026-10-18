@@ -7,6 +7,13 @@ const Base = createContext(0);
 /** Absolute start (seconds) of the enclosing Layer, so Phase can use episode-absolute times. */
 const useBase = () => useContext(Base);
 
+/** Episode-absolute time (seconds) inside a Layer. */
+export const useAbsTime = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  return useBase() + frame / fps;
+};
+
 /**
  * Episode-timeline layer in absolute seconds. Dissolves in over `fade` seconds and keeps living `fade`
  * seconds past `to` so the next layer can dissolve over it. `overlay` layers dissolve out instead.

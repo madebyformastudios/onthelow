@@ -94,7 +94,7 @@ Verder alleen donker, koel blauw en crème.
 
 ### Flow-stijlblok (letterlijk)
 
-> Hand-drawn digital illustration, thick clean black outlines, simple cartoon characters with round plain white heads and minimal faces, detailed painterly backgrounds, low-key cinematic lighting, cold blue and charcoal palette with a single signal-orange emergency light, vertical 9:16 frame, empty space at the top and bottom, no text anywhere
+> Hand-drawn digital illustration, thick clean black outlines, simple cartoon characters with round plain white heads and minimal faces, detailed painterly backgrounds, low-key cinematic lighting, cold blue and charcoal palette with a single signal-orange emergency light, vertical 9:16, empty space at the top and bottom, no text anywhere
 
 ### Flow-regels
 

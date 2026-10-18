@@ -90,7 +90,7 @@ Verder alleen wit, crème en donker. Dit scheidt A visueel van Saveo's roze.
 
 ### Flow-stijlblok (letterlijk)
 
-> Hand-drawn digital illustration, thick clean black outlines, simple cartoon characters with round plain white heads and minimal faces, detailed painterly backgrounds, moody cinematic lighting, dark warm palette with a single lime-green accent light, vertical 9:16 frame, empty space at the top and bottom, no text anywhere
+> Hand-drawn digital illustration, thick clean black outlines, simple cartoon characters with round plain white heads and minimal faces, detailed painterly backgrounds, moody cinematic lighting, dark warm palette with a single lime-green accent light, vertical 9:16, empty space at the top and bottom, no text anywhere
 
 ### Flow-regels
 

@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import { fonts, palette, springs, useSeries } from "../theme";
 import { Pop, useEnter } from "../motion";
+import { useAbsTime } from "./Layer";
 import { Change, ValueFormat, formatValue, valueAt } from "../format";
 
 const mono = (size: number, color: string): React.CSSProperties => ({
@@ -77,8 +78,13 @@ export const ConceptCard: React.FC<{
   stampAt: number;
   /** Seconds after the card appears at which the subline shows. */
   subAt?: number;
+  /** Headline size in px. */
+  size?: number;
+  /** Small mono source line under the subline, shown at `smallAt` seconds after the card appears. */
+  small?: string;
+  smallAt?: number;
   children?: React.ReactNode;
-}> = ({ lines, sub, stamp, stampAt, subAt = 0.35, children }) => {
+}> = ({ lines, sub, stamp, stampAt, subAt = 0.35, size = 190, small, smallAt = 0, children }) => {
   const { accent } = useSeries();
   return (
     <AbsoluteFill style={{ background: palette.warmInk }}>
@@ -86,7 +92,7 @@ export const ConceptCard: React.FC<{
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 70px" }}>
         {lines.map((l, i) => (
           <Pop key={l} at={i * 0.12}>
-            <div style={{ fontFamily: fonts.sans, fontWeight: 900, fontSize: 190, letterSpacing: -6, lineHeight: 0.95, color: accent }}>
+            <div style={{ fontFamily: fonts.sans, fontWeight: 900, fontSize: size, letterSpacing: -6, lineHeight: 0.95, color: accent }}>
               {l}
             </div>
           </Pop>
@@ -94,7 +100,12 @@ export const ConceptCard: React.FC<{
         <Pop at={subAt} style={{ marginTop: 44 }}>
           <div style={{ fontFamily: fonts.sans, fontWeight: 700, fontSize: 52, lineHeight: 1.2, color: palette.cream }}>{sub}</div>
         </Pop>
-        <div style={{ marginTop: 70 }}>
+        {small ? (
+          <Pop at={smallAt} y={10} style={{ marginTop: 26 }}>
+            <div style={{ ...mono(26, palette.grey), fontWeight: 500 }}>{small}</div>
+          </Pop>
+        ) : null}
+        <div style={{ marginTop: 60 }}>
           <Stamp text={stamp} at={stampAt} />
         </div>
       </AbsoluteFill>
@@ -234,4 +245,69 @@ export const YesGrid: React.FC<{ count: number; greyAt: number; step?: number }>
       </div>
     </AbsoluteFill>
   );
+};
+
+/** Jerrycan with a label inside. */
+export const Jerrycan: React.FC<{ label: string }> = ({ label }) => {
+  const { accent } = useSeries();
+  const p = useEnter(0, springs.pop);
+  return (
+    <div style={{ position: "relative", width: 340, height: 420, opacity: Math.min(1, p), transform: `scale(${0.85 + 0.15 * p})` }}>
+      <div style={{ position: "absolute", left: 20, top: 0, width: 150, height: 90, border: `12px solid ${palette.ink}`, borderBottom: "none", borderRadius: "40px 40px 0 0" }} />
+      <div style={{ position: "absolute", right: 36, top: 8, width: 70, height: 56, background: palette.ink, borderRadius: 10 }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 70, bottom: 0, background: accent, border: `10px solid ${palette.ink}`, borderRadius: 40, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: fonts.sans, fontWeight: 900, fontSize: 110, letterSpacing: -3, color: palette.ink }}>
+        {label}
+      </div>
+    </div>
+  );
+};
+
+/** Row of small bottles that pop in one by one. */
+export const BottleRow: React.FC<{ count: number; perRow?: number; step?: number }> = ({ count, perRow = 6, step = 0.08 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const { accent } = useSeries();
+  const t = frame / fps;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${perRow}, 1fr)`, gap: "22px 26px" }}>
+      {Array.from({ length: count }).map((_, i) => {
+        const born = Math.min(1, Math.max(0, (t - i * step) / 0.2));
+        return (
+          <div key={i} style={{ opacity: born, transform: `translateY(${(1 - born) * 20}px)`, textAlign: "center" }}>
+            <div style={{ width: 30, height: 20, margin: "0 auto", background: accent, border: `4px solid ${palette.ink}`, borderBottom: "none", borderRadius: "6px 6px 0 0" }} />
+            <div style={{ width: 70, height: 150, border: `6px solid ${palette.ink}`, borderRadius: 18, background: "rgba(11,11,12,0.18)" }} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+/** Grid of squares that fills with the accent color over `over` seconds. */
+export const FillGrid: React.FC<{ cols: number; rows: number; over: number }> = ({ cols, rows, over }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const { accent } = useSeries();
+  const filled = Math.min(1, frame / fps / over) * cols * rows;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 8, width: 900 }}>
+      {Array.from({ length: cols * rows }).map((_, i) => (
+        <div key={i} style={{ aspectRatio: "1", borderRadius: 8, background: i < filled ? accent : "rgba(11,11,12,0.12)", border: `3px solid ${i < filled ? palette.ink : "transparent"}`, boxSizing: "border-box" }} />
+      ))}
+    </div>
+  );
+};
+
+/** Camera shake on impulses at the given absolute times (seconds), e.g. knocks on a door. */
+export const Shake: React.FC<{ times: number[]; children: React.ReactNode }> = ({ times, children }) => {
+  const t = useAbsTime();
+  let x = 0;
+  let y = 0;
+  for (const k of times) {
+    if (t < k) continue;
+    const d = t - k;
+    x += 16 * Math.exp(-d * 9) * Math.sin(d * 70);
+    y += 10 * Math.exp(-d * 9) * Math.cos(d * 55);
+  }
+  return <AbsoluteFill style={{ transform: `translate(${x}px, ${y}px)` }}>{children}</AbsoluteFill>;
 };

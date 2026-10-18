@@ -1,19 +1,21 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { HEIGHT, WIDTH } from "../theme";
+import shotBars from "../shotBars.json";
 
 const IMG_RATIO = 768 / 1376;
 
 /**
  * Illustration with slow Ken Burns push-in and a soft top/bottom shade for HUD and subtitles.
- * `bars` crops baked-in black bars (fractions of the image height) and zooms to fill the frame.
+ * Baked-in black bars (see scripts/detect-bars.py -> shotBars.json) are cropped and the image zooms to fill the frame.
  */
 export const Shot: React.FC<{
   file: string;
   bars?: { top: number; bottom: number };
   focusX?: number;
   blur?: number;
-}> = ({ file, bars, focusX = 0.5, blur = 0 }) => {
+}> = ({ file, bars: barsProp, focusX = 0.5, blur = 0 }) => {
+  const bars = barsProp ?? (shotBars as Record<string, { top: number; bottom: number }>)[file];
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const p = frame / Math.max(1, durationInFrames);

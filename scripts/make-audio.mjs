@@ -39,6 +39,8 @@ const sfx = {
   stamp: () => { const x = mk(0.4); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = rnd() * env(t, 0.0005, 0.012) * 0.6 + Math.sin(TAU * (160 * Math.exp(-t * 20) + 70) * t) * env(t, 0.001, 0.07); } return lowpass(x, 2200); },
   // muted knock for notifications
   tap: () => { const x = mk(0.2); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * 330 * t) * env(t, 0.0008, 0.03) * 0.8 + rnd() * env(t, 0.0003, 0.006) * 0.25; } return lowpass(x, 1400); },
+  // dull wooden knock on a door
+  knock: () => { const x = mk(0.35); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * (210 * Math.exp(-t * 25) + 95) * t) * env(t, 0.001, 0.06) + rnd() * env(t, 0.0005, 0.01) * 0.35; } return lowpass(x, 1100); },
 };
 for (const [name, fn] of Object.entries(sfx)) wav(`public/sfx/${name}.wav`, fn());
 console.log("sfx ok");

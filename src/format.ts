@@ -1,6 +1,6 @@
 import { Easing, interpolate } from "remotion";
 
-export type ValueFormat = "usd" | "days" | "percent" | "liters";
+export type ValueFormat = "usd" | "days" | "percent" | "liters" | "plain";
 
 export const formatValue = (v: number | null, format: ValueFormat) => {
   if (v === null) return format === "days" ? "? DAYS" : "?";
@@ -14,6 +14,8 @@ export const formatValue = (v: number | null, format: ValueFormat) => {
       return `${n}%`;
     case "liters":
       return `${n} L`;
+    case "plain":
+      return `${n}`;
   }
 };
 
