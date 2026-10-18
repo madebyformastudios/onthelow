@@ -1,0 +1,1278 @@
+{
+ "estimated": false,
+ "audio": "voice/a-part-2-sell.wav",
+ "duration": 88.92,
+ "beats": [
+  {
+   "id": "hook",
+   "start": 0.0,
+   "end": 9.043,
+   "words": [
+    {
+     "w": "You",
+     "start": 0.25,
+     "end": 0.3
+    },
+    {
+     "w": "just",
+     "start": 0.29,
+     "end": 0.7
+    },
+    {
+     "w": "put",
+     "start": 0.7,
+     "end": 0.97
+    },
+    {
+     "w": "a",
+     "start": 0.97,
+     "end": 1.07
+    },
+    {
+     "w": "forty-nine",
+     "start": 1.07,
+     "end": 1.466
+    },
+    {
+     "w": "dollar",
+     "start": 1.466,
+     "end": 1.73
+    },
+    {
+     "w": "price",
+     "start": 1.73,
+     "end": 2.34
+    },
+    {
+     "w": "on",
+     "start": 2.34,
+     "end": 2.47
+    },
+    {
+     "w": "an",
+     "start": 2.47,
+     "end": 2.68
+    },
+    {
+     "w": "app",
+     "start": 2.68,
+     "end": 3.04
+    },
+    {
+     "w": "that",
+     "start": 3.04,
+     "end": 3.29
+    },
+    {
+     "w": "doesn't",
+     "start": 3.29,
+     "end": 3.79
+    },
+    {
+     "w": "exist.",
+     "start": 3.79,
+     "end": 4.24
+    },
+    {
+     "w": "Most",
+     "start": 4.456,
+     "end": 4.51
+    },
+    {
+     "w": "of",
+     "start": 4.51,
+     "end": 4.64
+    },
+    {
+     "w": "you",
+     "start": 4.64,
+     "end": 4.94
+    },
+    {
+     "w": "voted",
+     "start": 4.94,
+     "end": 5.18
+    },
+    {
+     "w": "for",
+     "start": 5.18,
+     "end": 5.38
+    },
+    {
+     "w": "it.",
+     "start": 5.38,
+     "end": 5.74
+    },
+    {
+     "w": "Problem",
+     "start": 5.956,
+     "end": 6.33
+    },
+    {
+     "w": "is,",
+     "start": 6.33,
+     "end": 6.68
+    },
+    {
+     "w": "strangers",
+     "start": 6.817,
+     "end": 7.42
+    },
+    {
+     "w": "don't",
+     "start": 7.42,
+     "end": 7.82
+    },
+    {
+     "w": "lie",
+     "start": 7.82,
+     "end": 8.08
+    },
+    {
+     "w": "to",
+     "start": 8.08,
+     "end": 8.22
+    },
+    {
+     "w": "be",
+     "start": 8.22,
+     "end": 8.38
+    },
+    {
+     "w": "nice.",
+     "start": 8.38,
+     "end": 9.0
+    }
+   ]
+  },
+  {
+   "id": "burn",
+   "start": 9.043,
+   "end": 17.564,
+   "words": [
+    {
+     "w": "First,",
+     "start": 9.193,
+     "end": 9.49
+    },
+    {
+     "w": "you",
+     "start": 9.49,
+     "end": 9.7
+    },
+    {
+     "w": "tell",
+     "start": 9.7,
+     "end": 10.0
+    },
+    {
+     "w": "the",
+     "start": 10.0,
+     "end": 10.19
+    },
+    {
+     "w": "developer",
+     "start": 10.19,
+     "end": 10.83
+    },
+    {
+     "w": "to",
+     "start": 10.83,
+     "end": 10.97
+    },
+    {
+     "w": "stop.",
+     "start": 10.97,
+     "end": 11.5
+    },
+    {
+     "w": "Burn",
+     "start": 11.724,
+     "end": 11.774
+    },
+    {
+     "w": "drops",
+     "start": 11.75,
+     "end": 12.01
+    },
+    {
+     "w": "from",
+     "start": 12.01,
+     "end": 12.24
+    },
+    {
+     "w": "fifteen",
+     "start": 12.24,
+     "end": 12.718
+    },
+    {
+     "w": "thousand",
+     "start": 12.718,
+     "end": 13.25
+    },
+    {
+     "w": "a",
+     "start": 13.25,
+     "end": 13.3
+    },
+    {
+     "w": "month",
+     "start": 13.3,
+     "end": 13.64
+    },
+    {
+     "w": "to",
+     "start": 13.64,
+     "end": 13.84
+    },
+    {
+     "w": "twenty-two",
+     "start": 13.84,
+     "end": 14.44
+    },
+    {
+     "w": "hundred.",
+     "start": 14.44,
+     "end": 14.94
+    },
+    {
+     "w": "Runway,",
+     "start": 15.146,
+     "end": 15.77
+    },
+    {
+     "w": "six",
+     "start": 15.77,
+     "end": 15.909
+    },
+    {
+     "w": "hundred",
+     "start": 15.909,
+     "end": 16.16
+    },
+    {
+     "w": "and",
+     "start": 16.16,
+     "end": 16.3
+    },
+    {
+     "w": "thirty-eight",
+     "start": 16.3,
+     "end": 16.69
+    },
+    {
+     "w": "days.",
+     "start": 16.69,
+     "end": 17.44
+    }
+   ]
+  },
+  {
+   "id": "vest",
+   "start": 17.564,
+   "end": 23.43,
+   "words": [
+    {
+     "w": "But",
+     "start": 17.714,
+     "end": 17.764
+    },
+    {
+     "w": "cash",
+     "start": 17.69,
+     "end": 17.88
+    },
+    {
+     "w": "isn't",
+     "start": 17.88,
+     "end": 18.19
+    },
+    {
+     "w": "your",
+     "start": 18.19,
+     "end": 18.53
+    },
+    {
+     "w": "problem",
+     "start": 18.53,
+     "end": 18.88
+    },
+    {
+     "w": "now.",
+     "start": 18.88,
+     "end": 19.28
+    },
+    {
+     "w": "Time",
+     "start": 19.521,
+     "end": 19.74
+    },
+    {
+     "w": "is.",
+     "start": 19.74,
+     "end": 20.32
+    },
+    {
+     "w": "The",
+     "start": 20.532,
+     "end": 20.6
+    },
+    {
+     "w": "Vest's",
+     "start": 20.6,
+     "end": 21.06
+    },
+    {
+     "w": "team",
+     "start": 21.06,
+     "end": 21.44
+    },
+    {
+     "w": "ships",
+     "start": 21.44,
+     "end": 21.91
+    },
+    {
+     "w": "in",
+     "start": 21.91,
+     "end": 22.1
+    },
+    {
+     "w": "twenty-eight",
+     "start": 22.1,
+     "end": 22.66
+    },
+    {
+     "w": "days.",
+     "start": 22.66,
+     "end": 23.36
+    }
+   ]
+  },
+  {
+   "id": "o1",
+   "start": 23.43,
+   "end": 30.027,
+   "words": [
+    {
+     "w": "Option",
+     "start": 23.58,
+     "end": 24.1
+    },
+    {
+     "w": "one:",
+     "start": 24.1,
+     "end": 24.68
+    },
+    {
+     "w": "post",
+     "start": 24.68,
+     "end": 24.94
+    },
+    {
+     "w": "it",
+     "start": 24.94,
+     "end": 25.07
+    },
+    {
+     "w": "everywhere.",
+     "start": 25.07,
+     "end": 25.76
+    },
+    {
+     "w": "Four",
+     "start": 25.991,
+     "end": 26.196
+    },
+    {
+     "w": "hundred",
+     "start": 26.196,
+     "end": 26.85
+    },
+    {
+     "w": "likes.",
+     "start": 27.148,
+     "end": 27.67
+    },
+    {
+     "w": "Zero",
+     "start": 27.67,
+     "end": 27.831
+    },
+    {
+     "w": "dollars.",
+     "start": 27.831,
+     "end": 28.1
+    },
+    {
+     "w": "Likes",
+     "start": 28.336,
+     "end": 28.43
+    },
+    {
+     "w": "cost",
+     "start": 28.43,
+     "end": 28.68
+    },
+    {
+     "w": "nothing",
+     "start": 28.68,
+     "end": 29.17
+    },
+    {
+     "w": "to",
+     "start": 29.17,
+     "end": 29.28
+    },
+    {
+     "w": "give.",
+     "start": 29.28,
+     "end": 29.76
+    }
+   ]
+  },
+  {
+   "id": "o2",
+   "start": 30.027,
+   "end": 34.38,
+   "words": [
+    {
+     "w": "Option",
+     "start": 30.177,
+     "end": 30.46
+    },
+    {
+     "w": "two:",
+     "start": 30.46,
+     "end": 31.06
+    },
+    {
+     "w": "ask",
+     "start": 31.093,
+     "end": 31.22
+    },
+    {
+     "w": "your",
+     "start": 31.22,
+     "end": 31.43
+    },
+    {
+     "w": "friends",
+     "start": 31.43,
+     "end": 31.8
+    },
+    {
+     "w": "again.",
+     "start": 31.8,
+     "end": 32.26
+    },
+    {
+     "w": "You",
+     "start": 32.533,
+     "end": 32.583
+    },
+    {
+     "w": "already",
+     "start": 32.51,
+     "end": 32.96
+    },
+    {
+     "w": "know",
+     "start": 32.96,
+     "end": 33.16
+    },
+    {
+     "w": "how",
+     "start": 33.16,
+     "end": 33.35
+    },
+    {
+     "w": "that",
+     "start": 33.35,
+     "end": 33.61
+    },
+    {
+     "w": "ends.",
+     "start": 33.61,
+     "end": 34.1
+    }
+   ]
+  },
+  {
+   "id": "o3",
+   "start": 34.38,
+   "end": 38.565,
+   "words": [
+    {
+     "w": "Option",
+     "start": 34.53,
+     "end": 34.8
+    },
+    {
+     "w": "three:",
+     "start": 34.8,
+     "end": 35.4
+    },
+    {
+     "w": "ask",
+     "start": 35.514,
+     "end": 35.61
+    },
+    {
+     "w": "strangers",
+     "start": 35.61,
+     "end": 36.25
+    },
+    {
+     "w": "for",
+     "start": 36.25,
+     "end": 36.46
+    },
+    {
+     "w": "money.",
+     "start": 36.46,
+     "end": 37.04
+    },
+    {
+     "w": "That's",
+     "start": 37.38,
+     "end": 37.48
+    },
+    {
+     "w": "the",
+     "start": 37.48,
+     "end": 37.74
+    },
+    {
+     "w": "scary",
+     "start": 37.74,
+     "end": 38.13
+    },
+    {
+     "w": "one.",
+     "start": 38.13,
+     "end": 38.54
+    }
+   ]
+  },
+  {
+   "id": "rule",
+   "start": 38.565,
+   "end": 42.3,
+   "words": [
+    {
+     "w": "Rule",
+     "start": 38.715,
+     "end": 38.98
+    },
+    {
+     "w": "two:",
+     "start": 38.98,
+     "end": 39.64
+    },
+    {
+     "w": "a",
+     "start": 39.756,
+     "end": 39.806
+    },
+    {
+     "w": "yes",
+     "start": 39.756,
+     "end": 39.96
+    },
+    {
+     "w": "only",
+     "start": 39.96,
+     "end": 40.29
+    },
+    {
+     "w": "counts",
+     "start": 40.29,
+     "end": 40.88
+    },
+    {
+     "w": "if",
+     "start": 40.88,
+     "end": 40.93
+    },
+    {
+     "w": "it",
+     "start": 40.91,
+     "end": 41.02
+    },
+    {
+     "w": "comes",
+     "start": 41.02,
+     "end": 41.29
+    },
+    {
+     "w": "with",
+     "start": 41.29,
+     "end": 41.56
+    },
+    {
+     "w": "a",
+     "start": 41.56,
+     "end": 41.61
+    },
+    {
+     "w": "credit",
+     "start": 41.58,
+     "end": 41.89
+    },
+    {
+     "w": "card.",
+     "start": 41.89,
+     "end": 42.3
+    }
+   ]
+  },
+  {
+   "id": "fix",
+   "start": 42.3,
+   "end": 49.169,
+   "words": [
+    {
+     "w": "So",
+     "start": 42.426,
+     "end": 42.55
+    },
+    {
+     "w": "you",
+     "start": 42.55,
+     "end": 42.65
+    },
+    {
+     "w": "build",
+     "start": 42.65,
+     "end": 43.0
+    },
+    {
+     "w": "a",
+     "start": 43.0,
+     "end": 43.07
+    },
+    {
+     "w": "one-page",
+     "start": 43.07,
+     "end": 43.63
+    },
+    {
+     "w": "site.",
+     "start": 43.63,
+     "end": 44.14
+    },
+    {
+     "w": "Forty-nine",
+     "start": 44.331,
+     "end": 44.555
+    },
+    {
+     "w": "dollars,",
+     "start": 44.555,
+     "end": 44.9
+    },
+    {
+     "w": "fully",
+     "start": 44.9,
+     "end": 45.32
+    },
+    {
+     "w": "refundable.",
+     "start": 45.367,
+     "end": 46.44
+    },
+    {
+     "w": "You",
+     "start": 46.693,
+     "end": 46.743
+    },
+    {
+     "w": "email",
+     "start": 46.69,
+     "end": 46.88
+    },
+    {
+     "w": "a",
+     "start": 46.88,
+     "end": 47.005
+    },
+    {
+     "w": "hundred",
+     "start": 47.005,
+     "end": 47.38
+    },
+    {
+     "w": "strangers",
+     "start": 47.38,
+     "end": 47.88
+    },
+    {
+     "w": "who",
+     "start": 47.88,
+     "end": 48.04
+    },
+    {
+     "w": "have",
+     "start": 48.04,
+     "end": 48.26
+    },
+    {
+     "w": "the",
+     "start": 48.26,
+     "end": 48.42
+    },
+    {
+     "w": "problem.",
+     "start": 48.42,
+     "end": 49.02
+    }
+   ]
+  },
+  {
+   "id": "results",
+   "start": 49.169,
+   "end": 55.837,
+   "words": [
+    {
+     "w": "Eleven",
+     "start": 49.319,
+     "end": 49.72
+    },
+    {
+     "w": "reply.",
+     "start": 49.72,
+     "end": 50.32
+    },
+    {
+     "w": "Three",
+     "start": 50.44,
+     "end": 50.82
+    },
+    {
+     "w": "pay.",
+     "start": 50.82,
+     "end": 51.32
+    },
+    {
+     "w": "A",
+     "start": 51.662,
+     "end": 51.712
+    },
+    {
+     "w": "hundred",
+     "start": 51.662,
+     "end": 51.944
+    },
+    {
+     "w": "and",
+     "start": 51.944,
+     "end": 52.204
+    },
+    {
+     "w": "forty-seven",
+     "start": 52.204,
+     "end": 52.88
+    },
+    {
+     "w": "dollars,",
+     "start": 52.88,
+     "end": 53.4
+    },
+    {
+     "w": "the",
+     "start": 53.4,
+     "end": 53.66
+    },
+    {
+     "w": "first",
+     "start": 53.66,
+     "end": 53.96
+    },
+    {
+     "w": "money",
+     "start": 53.96,
+     "end": 54.35
+    },
+    {
+     "w": "this",
+     "start": 54.35,
+     "end": 54.45
+    },
+    {
+     "w": "company",
+     "start": 54.45,
+     "end": 54.88
+    },
+    {
+     "w": "has",
+     "start": 54.88,
+     "end": 55.06
+    },
+    {
+     "w": "ever",
+     "start": 55.06,
+     "end": 55.29
+    },
+    {
+     "w": "made.",
+     "start": 55.29,
+     "end": 55.78
+    }
+   ]
+  },
+  {
+   "id": "spy",
+   "start": 55.837,
+   "end": 68.96,
+   "words": [
+    {
+     "w": "Here's",
+     "start": 55.987,
+     "end": 56.15
+    },
+    {
+     "w": "what",
+     "start": 56.15,
+     "end": 56.48
+    },
+    {
+     "w": "you",
+     "start": 56.48,
+     "end": 56.61
+    },
+    {
+     "w": "don't",
+     "start": 56.61,
+     "end": 56.9
+    },
+    {
+     "w": "know.",
+     "start": 56.9,
+     "end": 57.38
+    },
+    {
+     "w": "Customer",
+     "start": 57.416,
+     "end": 58.17
+    },
+    {
+     "w": "three",
+     "start": 58.17,
+     "end": 58.47
+    },
+    {
+     "w": "is",
+     "start": 58.47,
+     "end": 58.65
+    },
+    {
+     "w": "j.carter.",
+     "start": 58.65,
+     "end": 59.72
+    },
+    {
+     "w": "A",
+     "start": 59.73,
+     "end": 59.97
+    },
+    {
+     "w": "work",
+     "start": 59.97,
+     "end": 60.28
+    },
+    {
+     "w": "email,",
+     "start": 60.28,
+     "end": 60.86
+    },
+    {
+     "w": "from",
+     "start": 60.86,
+     "end": 61.02
+    },
+    {
+     "w": "the",
+     "start": 61.02,
+     "end": 61.14
+    },
+    {
+     "w": "company",
+     "start": 61.14,
+     "end": 61.42
+    },
+    {
+     "w": "that",
+     "start": 61.42,
+     "end": 61.65
+    },
+    {
+     "w": "raised",
+     "start": 61.65,
+     "end": 62.06
+    },
+    {
+     "w": "two",
+     "start": 62.06,
+     "end": 62.4
+    },
+    {
+     "w": "million",
+     "start": 62.4,
+     "end": 63.42
+    },
+    {
+     "w": "dollars.",
+     "start": 63.42,
+     "end": 63.47
+    },
+    {
+     "w": "Competitors",
+     "start": 63.42,
+     "end": 64.19
+    },
+    {
+     "w": "buy",
+     "start": 64.19,
+     "end": 64.49
+    },
+    {
+     "w": "your",
+     "start": 64.49,
+     "end": 64.68
+    },
+    {
+     "w": "product",
+     "start": 64.68,
+     "end": 65.18
+    },
+    {
+     "w": "to",
+     "start": 65.18,
+     "end": 65.33
+    },
+    {
+     "w": "copy",
+     "start": 65.33,
+     "end": 65.6
+    },
+    {
+     "w": "it.",
+     "start": 66.08,
+     "end": 66.13
+    },
+    {
+     "w": "That",
+     "start": 66.08,
+     "end": 66.29
+    },
+    {
+     "w": "has",
+     "start": 66.29,
+     "end": 66.51
+    },
+    {
+     "w": "a",
+     "start": 66.51,
+     "end": 66.58
+    },
+    {
+     "w": "name.",
+     "start": 66.58,
+     "end": 67.07
+    },
+    {
+     "w": "Competitive",
+     "start": 67.07,
+     "end": 67.82
+    },
+    {
+     "w": "intelligence.",
+     "start": 67.82,
+     "end": 68.96
+    }
+   ]
+  },
+  {
+   "id": "counter",
+   "start": 68.96,
+   "end": 74.581,
+   "words": [
+    {
+     "w": "Meanwhile,",
+     "start": 68.96,
+     "end": 69.69
+    },
+    {
+     "w": "The",
+     "start": 69.69,
+     "end": 69.89
+    },
+    {
+     "w": "Vest's",
+     "start": 69.89,
+     "end": 70.21
+    },
+    {
+     "w": "team",
+     "start": 70.21,
+     "end": 70.47
+    },
+    {
+     "w": "reads",
+     "start": 70.47,
+     "end": 70.79
+    },
+    {
+     "w": "your",
+     "start": 70.79,
+     "end": 71.06
+    },
+    {
+     "w": "pricing",
+     "start": 71.06,
+     "end": 71.6
+    },
+    {
+     "w": "page.",
+     "start": 71.6,
+     "end": 72.06
+    },
+    {
+     "w": "By",
+     "start": 72.157,
+     "end": 72.31
+    },
+    {
+     "w": "Friday,",
+     "start": 72.31,
+     "end": 72.84
+    },
+    {
+     "w": "they",
+     "start": 72.84,
+     "end": 73.16
+    },
+    {
+     "w": "have",
+     "start": 73.16,
+     "end": 73.48
+    },
+    {
+     "w": "a",
+     "start": 73.48,
+     "end": 73.56
+    },
+    {
+     "w": "free",
+     "start": 73.56,
+     "end": 73.88
+    },
+    {
+     "w": "plan.",
+     "start": 74.531,
+     "end": 74.581
+    }
+   ]
+  },
+  {
+   "id": "cliff",
+   "start": 74.581,
+   "end": 84.92,
+   "words": [
+    {
+     "w": "Day",
+     "start": 74.531,
+     "end": 74.71
+    },
+    {
+     "w": "nine,",
+     "start": 74.71,
+     "end": 75.05
+    },
+    {
+     "w": "eleven",
+     "start": 75.227,
+     "end": 75.439
+    },
+    {
+     "w": "forty-seven",
+     "start": 75.439,
+     "end": 76.07
+    },
+    {
+     "w": "p.m.",
+     "start": 76.07,
+     "end": 76.8
+    },
+    {
+     "w": "An",
+     "start": 76.8,
+     "end": 77.1
+    },
+    {
+     "w": "email.",
+     "start": 77.1,
+     "end": 77.98
+    },
+    {
+     "w": "We'll",
+     "start": 78.037,
+     "end": 78.23
+    },
+    {
+     "w": "pay",
+     "start": 78.23,
+     "end": 78.38
+    },
+    {
+     "w": "twenty-five",
+     "start": 78.38,
+     "end": 78.906
+    },
+    {
+     "w": "thousand",
+     "start": 78.906,
+     "end": 79.31
+    },
+    {
+     "w": "for",
+     "start": 79.31,
+     "end": 79.46
+    },
+    {
+     "w": "your",
+     "start": 79.46,
+     "end": 79.67
+    },
+    {
+     "w": "idea",
+     "start": 79.67,
+     "end": 79.94
+    },
+    {
+     "w": "and",
+     "start": 79.94,
+     "end": 80.15
+    },
+    {
+     "w": "your",
+     "start": 80.15,
+     "end": 80.43
+    },
+    {
+     "w": "waitlist.",
+     "start": 80.43,
+     "end": 81.24
+    },
+    {
+     "w": "It's",
+     "start": 81.293,
+     "end": 81.56
+    },
+    {
+     "w": "from",
+     "start": 81.56,
+     "end": 81.94
+    },
+    {
+     "w": "The",
+     "start": 81.94,
+     "end": 82.13
+    },
+    {
+     "w": "Vest.",
+     "start": 82.13,
+     "end": 82.82
+    },
+    {
+     "w": "Take",
+     "start": 82.878,
+     "end": 83.15
+    },
+    {
+     "w": "the",
+     "start": 83.15,
+     "end": 83.4
+    },
+    {
+     "w": "cash,",
+     "start": 83.4,
+     "end": 83.73
+    },
+    {
+     "w": "or",
+     "start": 83.73,
+     "end": 83.91
+    },
+    {
+     "w": "keep",
+     "start": 83.91,
+     "end": 84.22
+    },
+    {
+     "w": "going?",
+     "start": 84.22,
+     "end": 84.92
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "start": 84.92,
+   "end": 88.92,
+   "words": [
+    {
+     "w": "Comment",
+     "start": 84.92,
+     "end": 85.62
+    },
+    {
+     "w": "TAKE",
+     "start": 85.62,
+     "end": 86.02
+    },
+    {
+     "w": "or",
+     "start": 86.02,
+     "end": 86.17
+    },
+    {
+     "w": "KEEP.",
+     "start": 86.17,
+     "end": 86.72
+    },
+    {
+     "w": "Part",
+     "start": 86.72,
+     "end": 86.97
+    },
+    {
+     "w": "three",
+     "start": 86.97,
+     "end": 87.11
+    },
+    {
+     "w": "follows",
+     "start": 87.11,
+     "end": 87.5
+    },
+    {
+     "w": "what",
+     "start": 87.5,
+     "end": 87.72
+    },
+    {
+     "w": "you",
+     "start": 87.72,
+     "end": 87.89
+    },
+    {
+     "w": "pick.",
+     "start": 87.89,
+     "end": 88.32
+    }
+   ]
+  }
+ ]
+}

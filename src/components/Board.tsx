@@ -8,11 +8,13 @@ import { Change, ValueFormat, formatValue, valueAt } from "../format";
 export const InfographicBoard: React.FC<{
   kicker: string;
   source?: string;
+  /** Distance of the kicker from the top (px); push it below the HUD when the HUD is visible. */
+  kickerTop?: number;
   children: React.ReactNode;
-}> = ({ kicker, source, children }) => {
+}> = ({ kicker, source, kickerTop = 200, children }) => {
   return (
     <AbsoluteFill style={{ background: palette.cream, backgroundImage: "linear-gradient(rgba(11,11,12,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11,11,12,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }}>
-      <div style={{ position: "absolute", top: 200, left: 0, right: 0, textAlign: "center" }}>
+      <div style={{ position: "absolute", top: kickerTop, left: 0, right: 0, textAlign: "center" }}>
         <Pop y={16}>
           <div
             style={{

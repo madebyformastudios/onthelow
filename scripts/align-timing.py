@@ -9,12 +9,15 @@ The script text (not whisper's spelling, e.g. "$50,000") is what ends up in timi
 import difflib, json, re, subprocess, sys
 
 ep, audio, audio_len = sys.argv[1], sys.argv[2], float(sys.argv[3])
-IDS = ["hook", "title", "p1", "p2", "rule", "d2a", "d2b", "d2c", "d3", "temptation", "end"]
+IDS = ["hook", "title", "p1", "p2", "rule", "d2a", "d2b", "d2c", "d3", "temptation", "end"]  # old format only
 norm = lambda w: re.sub(r"[^a-z0-9]", "", w.lower())
 
 md = open(f"episodes/{ep}/voiceover.md").read()
 body = md.split("## Per beat")[1].split("## Volledige tekst")[0]
 texts = re.findall(r"\*\*[\d:]+-[\d:]+ · .+?\*\*\n\n(.+?)\n", body)
+if not texts:  # new format: "**beat-id**" then the text
+    found = re.findall(r"\*\*(\w+)\*\*\n\n(.+?)\n", body)
+    IDS, texts = [i for i, _ in found], [t for _, t in found]
 assert len(texts) == len(IDS)
 
 script = [(i, w) for i, t in enumerate(texts) for w in t.split()]
