@@ -75,8 +75,10 @@ export const ConceptCard: React.FC<{
   sub: string;
   stamp: string;
   stampAt: number;
+  /** Seconds after the card appears at which the subline shows. */
+  subAt?: number;
   children?: React.ReactNode;
-}> = ({ lines, sub, stamp, stampAt, children }) => {
+}> = ({ lines, sub, stamp, stampAt, subAt = 0.35, children }) => {
   const { accent } = useSeries();
   return (
     <AbsoluteFill style={{ background: palette.warmInk }}>
@@ -89,7 +91,7 @@ export const ConceptCard: React.FC<{
             </div>
           </Pop>
         ))}
-        <Pop at={0.35} style={{ marginTop: 44 }}>
+        <Pop at={subAt} style={{ marginTop: 44 }}>
           <div style={{ fontFamily: fonts.sans, fontWeight: 700, fontSize: 52, lineHeight: 1.2, color: palette.cream }}>{sub}</div>
         </Pop>
         <div style={{ marginTop: 70 }}>

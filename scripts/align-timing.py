@@ -6,7 +6,7 @@
 
 The script text (not whisper's spelling, e.g. "$50,000") is what ends up in timing.json; whisper only supplies times.
 """
-import difflib, json, re, sys
+import difflib, json, re, subprocess, sys
 
 ep, audio, audio_len = sys.argv[1], sys.argv[2], float(sys.argv[3])
 IDS = ["hook", "title", "p1", "p2", "rule", "d2a", "d2b", "d2c", "d3", "temptation", "end"]
@@ -42,6 +42,20 @@ for k, (tag, i1, i2, j1, j2) in enumerate(ops):
         start[i], end[i] = t, t + dur
         t += dur
 
+# whisper starts a word at the end of the previous one, so a word after a pause begins too early.
+# Snap such starts forward to where speech actually resumes (ffmpeg silencedetect), and cut ends back to it.
+log = subprocess.run(["ffmpeg", "-hide_banner", "-i", f"public/{audio}", "-af", "silencedetect=noise=-38dB:d=0.12", "-f", "null", "-"],
+                     capture_output=True, text=True).stderr
+ss = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", log)]
+se = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
+gaps = list(zip(ss, se))
+snapped = 0
+for i in range(len(script)):
+    for a_, b_ in gaps:
+        if a_ - 0.02 <= start[i] < b_ - 0.03:
+            start[i], snapped = b_, snapped + 1
+            end[i] = max(end[i], start[i] + 0.1)
+            break
 for i in range(len(script) - 1):
     end[i] = max(start[i] + 0.05, min(end[i], start[i + 1]))
 end[-1] = min(end[-1], audio_len)
@@ -59,4 +73,4 @@ for b, id_ in enumerate(IDS):
 json.dump({"estimated": False, "audio": audio, "duration": round(cursor, 3), "beats": beats},
           open(f"episodes/{ep}/timing.json", "w"), indent=1)
 unmatched = sum(1 for tag, i1, i2, j1, j2 in ops if tag != "equal" for _ in range(i2 - i1))
-print(f"{ep}: {cursor:.1f} s, {unmatched}/{len(script)} script words interpolated")
+print(f"{ep}: {cursor:.1f} s, {unmatched}/{len(script)} script words interpolated, {snapped} starts snapped to speech onset")

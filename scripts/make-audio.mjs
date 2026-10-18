@@ -1,7 +1,7 @@
-// Synthesizes the background music and the sound effects (no downloads, deterministic).
-// Usage: node scripts/make-audio.mjs   -> public/sfx/*.wav and public/music/mystery.mp3 (needs ffmpeg for the mp3)
+// Synthesizes the sound effects (no downloads). Deliberately few, short and quiet.
+// The approved background music (public/music/mystery.mp3) came from an earlier version of this script and is kept as is.
+// Usage: node scripts/make-audio.mjs   -> public/sfx/*.wav
 import fs from "node:fs";
-import { execFileSync } from "node:child_process";
 
 const SR = 44100;
 const TAU = Math.PI * 2;
@@ -31,61 +31,14 @@ const lowpass = (x, hz) => { const a = 1 - Math.exp((-TAU * hz) / SR); let y = 0
 
 // ---- SFX ----
 const sfx = {
-  pop: () => { const x = mk(0.25); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * (900 * Math.exp(-t * 18) + 220) * t) * env(t, 0.002, 0.05); } return x; },
-  tick: () => { const x = mk(0.06); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * 2400 * t) * env(t, 0.0005, 0.008); } return x; },
-  ding: () => { const x = mk(1.6); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = (Math.sin(TAU * 1318 * t) + 0.4 * Math.sin(TAU * 1318 * 2.76 * t)) * env(t, 0.002, 0.35) * 0.6; } return x; },
-  stamp: () => { const x = mk(0.7); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * (120 * Math.exp(-t * 6) + 48) * t) * env(t, 0.001, 0.16) + rnd() * env(t, 0.001, 0.025) * 0.5; } return lowpass(x, 2500); },
-  boom: () => { const x = mk(2.2); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * (70 * Math.exp(-t * 1.2) + 32) * t) * env(t, 0.01, 0.7) + rnd() * env(t, 0.002, 0.08) * 0.25; } return lowpass(x, 700); },
-  whoosh: () => { const x = mk(0.9); const n = new Float32Array(x.length); for (let i = 0; i < n.length; i++) n[i] = rnd(); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = n[i] * Math.sin((Math.PI * t) / 0.9) ** 2 * 0.5; } // sweep via two lowpass passes with rising cutoff
-    let y = 0; for (let i = 0; i < x.length; i++) { const t = i / SR; const a = 1 - Math.exp((-TAU * (300 + 3500 * (t / 0.9))) / SR); y += a * (x[i] - y); x[i] = y; } return x; },
-  count: () => { const x = mk(1.4); for (let k = 0; k < 18; k++) { const t0 = k * 0.07; const f = 900 + k * 70; for (let i = Math.round(t0 * SR); i < Math.min(x.length, Math.round((t0 + 0.05) * SR)); i++) { const t = i / SR - t0; x[i] += Math.sin(TAU * f * t) * env(t, 0.0005, 0.01) * 0.8; } } return x; },
+  // soft low thump for cards: short, no long sine tail
+  thud: () => { const x = mk(0.55); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * (95 * Math.exp(-t * 14) + 42) * t) * env(t, 0.004, 0.11) + rnd() * env(t, 0.001, 0.02) * 0.12; } return lowpass(x, 420); },
+  // breathy air swell
+  whoosh: () => { const x = mk(0.7); let y = 0; for (let i = 0; i < x.length; i++) { const t = i / SR; const a = 1 - Math.exp((-TAU * (250 + 1800 * Math.sin((Math.PI * t) / 0.7))) / SR); y += a * (rnd() - y); x[i] = y * Math.sin((Math.PI * t) / 0.7) ** 2 * 0.9; } return x; },
+  // wooden rubber-stamp clack: noise tick plus a short body
+  stamp: () => { const x = mk(0.4); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = rnd() * env(t, 0.0005, 0.012) * 0.6 + Math.sin(TAU * (160 * Math.exp(-t * 20) + 70) * t) * env(t, 0.001, 0.07); } return lowpass(x, 2200); },
+  // muted knock for notifications
+  tap: () => { const x = mk(0.2); for (let i = 0; i < x.length; i++) { const t = i / SR; x[i] = Math.sin(TAU * 330 * t) * env(t, 0.0008, 0.03) * 0.8 + rnd() * env(t, 0.0003, 0.006) * 0.25; } return lowpass(x, 1400); },
 };
 for (const [name, fn] of Object.entries(sfx)) wav(`public/sfx/${name}.wav`, fn());
-
-// ---- Music: dark minor drone, slow pad, sparse bells with ping-pong echo ----
-const DUR = 125;
-const L = mk(DUR), R = mk(DUR);
-const chords = [
-  [55, 110, 130.81, 164.81], // Am
-  [43.65, 87.31, 130.81, 174.61], // Fmaj7 (shadowed)
-  [36.71, 73.42, 110, 146.83], // Dm
-  [41.2, 82.41, 123.47, 155.56], // E (G# for tension)
-];
-const CH = 15; // seconds per chord, 4 s crossfade
-for (let i = 0; i < L.length; i++) {
-  const t = i / SR;
-  const idx = Math.floor(t / CH);
-  const local = t - idx * CH;
-  const mix = (c, w) => chords[c % chords.length].reduce((s, f, k) => s + Math.sin(TAU * f * t + 0.6 * Math.sin(TAU * (0.07 + k * 0.013) * t)) * (k === 0 ? 0.5 : 0.18) * w + Math.sin(TAU * f * 2.003 * t) * 0.03 * w, 0);
-  const xf = Math.min(1, local / 4);
-  const s = (idx > 0 ? mix(idx - 1, 1 - xf) : 0) + mix(idx, idx > 0 ? xf : 1);
-  const swell = 0.75 + 0.25 * Math.sin(TAU * t / 9.5);
-  const fadeIn = Math.min(1, t / 3), fadeOut = Math.min(1, (DUR - t) / 4);
-  const v = s * swell * fadeIn * fadeOut * 0.33;
-  L[i] = v; R[i] = v * 0.96;
-}
-// bells: pentatonic A minor, deterministic gaps
-const notes = [440, 523.25, 659.25, 783.99, 880, 659.25, 523.25];
-let t0 = 6, ni = 0;
-const echoL = new Float32Array(L.length), echoR = new Float32Array(L.length);
-while (t0 < DUR - 6) {
-  const f = notes[ni++ % notes.length] * (ni % 5 === 0 ? 0.5 : 1);
-  for (let i = Math.round(t0 * SR); i < Math.min(L.length, Math.round((t0 + 3) * SR)); i++) {
-    const t = i / SR - t0;
-    const m = Math.sin(TAU * f * t + 1.8 * Math.sin(TAU * f * 3.5 * t) * Math.exp(-t * 4)) * env(t, 0.004, 0.55) * 0.09;
-    echoL[i] += m; echoR[i] += m * 0.6;
-  }
-  t0 += 5 + (Math.abs(rnd()) * 6);
-}
-const d1 = Math.round(0.43 * SR), d2 = Math.round(0.61 * SR);
-for (let i = 0; i < L.length; i++) {
-  if (i >= d1) echoR[i] += echoL[i - d1] * 0.5;
-  if (i >= d2) echoL[i] += echoR[i - d2] * 0.5;
-  L[i] += echoL[i]; R[i] += echoR[i];
-}
-// quiet low pulse, like a slow heartbeat under the tension
-for (let b = 8; b < DUR - 5; b += 2.4) for (const off of [0, 0.32]) for (let i = Math.round((b + off) * SR); i < Math.round((b + off + 0.5) * SR); i++) { const t = i / SR - b - off; const v = Math.sin(TAU * 48 * t) * env(t, 0.01, 0.1) * 0.12; L[i] += v; R[i] += v; }
-wav("/tmp/mystery.wav", lowpass(L, 5000), lowpass(R, 5000));
-execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-i", "/tmp/mystery.wav", "-b:a", "160k", "public/music/mystery.mp3"]);
-fs.unlinkSync("/tmp/mystery.wav");
-console.log("audio ok");
+console.log("sfx ok");

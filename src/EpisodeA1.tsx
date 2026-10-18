@@ -30,7 +30,7 @@ const at = (id: string, word: string, nth = 1) => {
 export const EPISODE_A1_SECONDS = timing.duration;
 
 /** One-shot sound effect at an absolute time (seconds). */
-const Sfx: React.FC<{ at: number; src: "pop" | "tick" | "ding" | "stamp" | "boom" | "whoosh" | "count"; volume?: number }> = ({
+const Sfx: React.FC<{ at: number; src: "thud" | "whoosh" | "stamp" | "tap"; volume?: number }> = ({
   at: t,
   src,
   volume = 0.4,
@@ -54,17 +54,18 @@ const subtitleWords: Word[] = (timing.beats as Beat[]).flatMap((b) =>
 );
 
 const B = beats;
-const frac = (b: Beat, f: number) => b.start + (b.end - b.start) * f;
 
-// Beat 1 shot cuts follow the plan's proportions (3s, 2s, 2s of 7s).
-const hookCut1 = frac(B.hook, 3 / 7);
-const hookCut2 = frac(B.hook, 5 / 7);
-const p2Cut1 = frac(B.p2, 0.33);
-const p2Cut2 = frac(B.p2, 0.62);
+// Shot cuts land on the sentence they illustrate.
+const hookCut1 = at("hook", "you", 2); // "You have fifty thousand dollars..."
+const hookCut2 = at("hook", "and"); // "And the hard part?"
+const p2Cut1 = at("p2", "it's"); // "It's not money."
+const p2Cut2 = at("p2", "cb"); // "CB Insights went through..."
 
 const tHundred = at("p1", "hundred", 2);
 const tFortyseven = at("d2a", "forty-seven");
 const tDeveloper = at("d2a", "developer");
+const tMom = at("d2b", "mom");
+const tAsk1 = at("d2b", "ask");
 const tAsk2 = at("d2b", "ask", 2);
 const tWork = at("d2c", "work");
 const tCompany = at("d2c", "company");
@@ -79,6 +80,7 @@ const subtitleWindows: [number, number][] = [
   [B.hook.start, B.hook.end],
   [B.p2.start, B.p2.end],
   [dayCardEnd, B.d2a.end],
+  [B.d2b.start, B.d2b.end],
   [B.d2c.start, B.d2c.end],
   [B.temptation.start, B.temptation.end],
 ];
@@ -115,34 +117,17 @@ export const EpisodeA1: React.FC = () => (
       <Audio src={staticFile(timing.audio)} />
       <Audio src={staticFile("music/mystery.mp3")} volume={musicVolume} />
 
-      {/* Sound design: light hits on cards, pops on board phases, counters on HUD changes */}
-      <Sfx at={B.title.start} src="boom" volume={0.55} />
-      <Sfx at={B.p1.start} src="whoosh" volume={0.25} />
-      {[at("p1", "fifty"), at("p1", "eighty"), at("p1", "thirty-two"), at("p1", "rent"), at("p1", "rent") + 0.3, at("p1", "rent") + 0.6, at("p1", "fifteen"), at("p1", "that's", 2)].map((x) => (
-        <Sfx key={x} at={x} src="pop" volume={0.3} />
-      ))}
-      <Sfx at={tHundred} src="stamp" volume={0.4} />
-      <Sfx at={tHundred} src="count" volume={0.22} />
-      <Sfx at={at("p2", "reason")} src="pop" volume={0.3} />
-      <Sfx at={B.rule.start} src="boom" volume={0.4} />
-      <Sfx at={B.d2a.start} src="boom" volume={0.35} />
-      <Sfx at={at("d2a", "fifty")} src="count" volume={0.22} />
-      <Sfx at={at("d2a", "thirty-two")} src="count" volume={0.22} />
-      <Sfx at={B.d2b.start} src="whoosh" volume={0.3} />
-      <Sfx at={at("d2b", "lie")} src="stamp" volume={0.55} />
-      <Sfx at={at("d2b", "lie")} src="count" volume={0.2} />
-      {Array.from({ length: 24 }).map((_, i) => (
-        <Sfx key={i} at={at("d2b", "friend") + i * 0.14} src="tick" volume={0.12} />
-      ))}
-      <Sfx at={tWork} src="ding" volume={0.35} />
-      <Sfx at={at("d2c", "raised")} src="count" volume={0.2} />
-      <Sfx at={B.d3.start} src="boom" volume={0.35} />
-      <Sfx at={tFortysix} src="whoosh" volume={0.25} />
-      <Sfx at={tAgency} src="ding" volume={0.3} />
-      <Sfx at={tBuild} src="pop" volume={0.4} />
-      <Sfx at={B.end.start} src="whoosh" volume={0.3} />
-      <Sfx at={B.end.start + 0.8} src="pop" volume={0.3} />
-      <Sfx at={B.end.start + 0.95} src="pop" volume={0.3} />
+      {/* Sound design: few, quiet and short. Thuds on cards, a swell on big changes, a stamp, two taps. */}
+      <Sfx at={B.title.start} src="thud" volume={0.25} />
+      <Sfx at={B.rule.start} src="thud" volume={0.2} />
+      <Sfx at={B.d2a.start} src="thud" volume={0.2} />
+      <Sfx at={B.d3.start} src="thud" volume={0.2} />
+      <Sfx at={tMom} src="whoosh" volume={0.12} />
+      <Sfx at={at("d2b", "lie")} src="stamp" volume={0.3} />
+      <Sfx at={tWork} src="tap" volume={0.15} />
+      <Sfx at={tFortysix} src="whoosh" volume={0.1} />
+      <Sfx at={tAgency} src="tap" volume={0.15} />
+      <Sfx at={B.end.start} src="whoosh" volume={0.1} />
 
       {/* 1 Hook */}
       <Layer from={B.hook.start} to={hookCut1} fade={0.01}><Shot file="A01_S01" /></Layer>
@@ -208,13 +193,15 @@ export const EpisodeA1: React.FC = () => (
       </Layer>
       <Layer from={B.d2a.start} to={dayCardEnd} fade={0.5} overlay><DayCard day={2} /></Layer>
 
-      {/* 6b Day 2: the trap */}
-      <Layer from={B.d2b.start} to={tAsk2}>
+      {/* 6b Day 2: the trap. The concept card appears when "The Mom Test" is said, not before. */}
+      <Layer from={B.d2b.start} to={tMom}><Shot file="A01_S08" /></Layer>
+      <Layer from={tMom - 0.1} to={tAsk2}>
         <ConceptCard
           lines={["THE MOM", "TEST"]}
           sub="Asking people if they like your idea gets you polite lies."
+          subAt={tAsk1 - (tMom - 0.1)}
           stamp="FALSE SIGNAL"
-          stampAt={at("d2b", "lie") - B.d2b.start}
+          stampAt={at("d2b", "lie") - (tMom - 0.1)}
         >
           <Shot file="A01_S08" />
         </ConceptCard>
