@@ -1,0 +1,10 @@
+{
+  "series": "day-zero",
+  "part": 1,
+  "accent": "#FF6A1A",
+  "hud": [
+    { "key": "water", "label": "WATER", "value": 18, "format": "liters", "display": "18 L" },
+    { "key": "morale", "label": "MORALE", "value": 80, "format": "percent", "display": "80%" },
+    { "key": "danger", "label": "DANGER", "value": 0, "format": "percent", "display": "0%" }
+  ]
+}

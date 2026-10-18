@@ -1,0 +1,10 @@
+{
+  "series": "founder-mode",
+  "part": 1,
+  "accent": "#B5F23D",
+  "hud": [
+    { "key": "cash", "label": "CASH", "value": 50000, "format": "usd", "display": "$50,000" },
+    { "key": "runway", "label": "RUNWAY", "value": null, "format": "days", "display": "? DAYS" },
+    { "key": "burnout", "label": "BURNOUT", "value": 0, "format": "percent", "display": "0%" }
+  ]
+}
