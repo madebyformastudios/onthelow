@@ -51,3 +51,15 @@ export const SeriesProvider: React.FC<{ series: SeriesId; children: React.ReactN
 }) => <SeriesContext.Provider value={SERIES[series]}>{children}</SeriesContext.Provider>;
 
 export const useSeries = () => useContext(SeriesContext);
+
+/**
+ * Instagram crops the sides on tall phones (about 100px each) and covers the top (status bar, back, camera),
+ * the right edge (like column) and the bottom (caption). Episodes that set this keep their UI inside that frame.
+ * Without it every component keeps its original layout (A1, B1).
+ */
+export type Safe = { side: number; /** right edge inside the like-column band (y 900 to 1650) */ rightBand: number; hudTop: number };
+const SafeContext = createContext<Safe | null>(null);
+export const SafeProvider: React.FC<{ safe: Safe; children: React.ReactNode }> = ({ safe, children }) => (
+  <SafeContext.Provider value={safe}>{children}</SafeContext.Provider>
+);
+export const useSafe = () => useContext(SafeContext);

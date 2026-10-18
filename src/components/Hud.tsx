@@ -1,6 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { fonts, palette, useSeries } from "../theme";
+import { fonts, palette, useSafe, useSeries } from "../theme";
 import { Change, ValueFormat, formatValue, isChanging, valueAt } from "../format";
 import { useEnter } from "../motion";
 
@@ -27,6 +27,7 @@ export const Hud: React.FC<Props> = ({ state, changes = {}, hotAbove = {}, tag: 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { accent } = useSeries();
+  const safe = useSafe();
   const t = frame / fps;
   const enterSpring = useEnter(0, { damping: 200 });
   const enter = windows
@@ -38,9 +39,9 @@ export const Hud: React.FC<Props> = ({ state, changes = {}, hotAbove = {}, tag: 
     <div
       style={{
         position: "absolute",
-        top: 190,
-        left: 40,
-        right: 40,
+        top: safe?.hudTop ?? 190,
+        left: safe?.side ?? 40,
+        right: safe?.side ?? 40,
         opacity: enter,
         transform: `translateY(${(1 - enter) * -20}px)`,
       }}

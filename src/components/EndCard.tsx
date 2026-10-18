@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { fonts, palette, useSeries } from "../theme";
+import { fonts, palette, useSafe, useSeries } from "../theme";
 import { Pop } from "../motion";
 import { ChoiceButton } from "./ChoiceButton";
 
@@ -12,12 +12,13 @@ export const EndCard: React.FC<{
   children?: React.ReactNode;
 }> = ({ nextPart, lines, options, children }) => {
   const { accent, tagline } = useSeries();
+  const safe = useSafe();
   return (
     <AbsoluteFill style={{ background: palette.warmInk, }}>
       <AbsoluteFill style={{ filter: "blur(18px) brightness(0.5)", transform: "scale(1.12)" }}>
         {children}
       </AbsoluteFill>
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 70px", textAlign: "center" }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: safe ? `0 ${safe.rightBand}px 0 ${safe.side}px` : "0 70px", textAlign: "center" }}>
         <Pop y={16}>
           <div style={{ fontFamily: fonts.mono, fontSize: 26, letterSpacing: 6, color: "rgba(255,255,255,0.6)", marginBottom: 30 }}>
             {tagline.toUpperCase()}

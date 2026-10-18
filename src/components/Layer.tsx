@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { Easing, Sequence, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { useExit } from "../motion";
+import { useSafe } from "../theme";
 
 const Base = createContext(0);
 
@@ -66,6 +67,7 @@ export const Phase: React.FC<{ from: number; to: number; children: React.ReactNo
 
 const PhaseBody: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const out = useExit(0.2);
+  const safe = useSafe();
   return (
     <div
       style={{
@@ -77,7 +79,7 @@ const PhaseBody: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         alignItems: "center",
         justifyContent: "center",
         gap: 40,
-        padding: "0 80px",
+        padding: safe ? `0 ${safe.rightBand}px 0 ${safe.side}px` : "0 80px",
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
-import { fonts, palette, useSeries, easeOut } from "../theme";
+import { fonts, palette, useSafe, useSeries, easeOut } from "../theme";
 import { Pop, useEnter } from "../motion";
 import { Change, ValueFormat, formatValue, valueAt } from "../format";
 
@@ -12,6 +12,7 @@ export const InfographicBoard: React.FC<{
   kickerTop?: number;
   children: React.ReactNode;
 }> = ({ kicker, source, kickerTop = 200, children }) => {
+  const safe = useSafe();
   return (
     <AbsoluteFill style={{ background: palette.cream, backgroundImage: "linear-gradient(rgba(11,11,12,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11,11,12,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }}>
       <div style={{ position: "absolute", top: kickerTop, left: 0, right: 0, textAlign: "center" }}>
@@ -30,7 +31,7 @@ export const InfographicBoard: React.FC<{
         </Pop>
       </div>
       <AbsoluteFill
-        style={{ alignItems: "center", justifyContent: "center", padding: "0 80px", gap: 40 }}
+        style={{ alignItems: "center", justifyContent: "center", padding: safe ? `0 ${safe.rightBand}px 0 ${safe.side}px` : "0 80px", gap: 40 }}
       >
         {children}
       </AbsoluteFill>

@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { fonts, palette, springs, useSeries } from "../theme";
+import { fonts, palette, springs, useSafe, useSeries } from "../theme";
 import { Pop, useEnter } from "../motion";
 import { useAbsTime } from "./Layer";
 import { Change, ValueFormat, formatValue, valueAt } from "../format";
@@ -16,8 +16,9 @@ const mono = (size: number, color: string): React.CSSProperties => ({
 /** Small accent tag on an illustration, e.g. "#1 REASON STARTUPS DIE · NO MARKET NEED". */
 export const LabelTag: React.FC<{ text: string; top?: number }> = ({ text, top = 420 }) => {
   const { accent } = useSeries();
+  const safe = useSafe();
   return (
-    <div style={{ position: "absolute", top, left: 40, right: 40 }}>
+    <div style={{ position: "absolute", top, left: safe?.side ?? 40, right: safe?.side ?? 40 }}>
       <Pop y={20}>
         <span
           style={{
@@ -86,10 +87,11 @@ export const ConceptCard: React.FC<{
   children?: React.ReactNode;
 }> = ({ lines, sub, stamp, stampAt, subAt = 0.35, size = 190, small, smallAt = 0, children }) => {
   const { accent } = useSeries();
+  const safe = useSafe();
   return (
     <AbsoluteFill style={{ background: palette.warmInk }}>
       <AbsoluteFill style={{ filter: "blur(10px) brightness(0.35)", transform: "scale(1.1)" }}>{children}</AbsoluteFill>
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 70px" }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", textAlign: "center", padding: safe ? `0 ${safe.rightBand}px 0 ${safe.side}px` : "0 70px" }}>
         {lines.map((l, i) => (
           <Pop key={l} at={i * 0.12}>
             <div style={{ fontFamily: fonts.sans, fontWeight: 900, fontSize: size, letterSpacing: -6, lineHeight: 0.95, color: accent }}>
@@ -127,8 +129,9 @@ export const CountBadge: React.FC<{
   const { fps } = useVideoConfig();
   const changes: Change[] = [{ at, value: to, over }];
   const v = Math.round(valueAt(0, changes, frame / fps) ?? 0);
+  const safe = useSafe();
   return (
-    <div style={{ position: "absolute", top, right: 40 }}>
+    <div style={{ position: "absolute", top, right: safe?.side ?? 40 }}>
       <Pop y={20}>
         <div
           style={{
@@ -158,8 +161,11 @@ export const NoticeCard: React.FC<{ kicker: string; text: string; top: number; m
   mark,
 }) => {
   const { accent } = useSeries();
+  const safe = useSafe();
+  // inside the like-column band the right edge has to stay clear of the icons
+  const right = safe ? (top > 730 ? safe.rightBand : safe.side) : 60;
   return (
-    <div style={{ position: "absolute", top, left: 60, right: 60 }}>
+    <div style={{ position: "absolute", top, left: safe?.side ?? 60, right }}>
       <Pop y={30}>
         <div
           style={{
@@ -184,7 +190,7 @@ export const NoticeCard: React.FC<{ kicker: string; text: string; top: number; m
 };
 
 /** Tear-off calendar page with a big number. */
-export const Calendar: React.FC<{ big: string; unit: string }> = ({ big, unit }) => {
+export const Calendar: React.FC<{ big: string; unit: string; size?: number }> = ({ big, unit, size = 300 }) => {
   const p = useEnter(0, springs.pop);
   return (
     <div
@@ -201,7 +207,7 @@ export const Calendar: React.FC<{ big: string; unit: string }> = ({ big, unit })
       }}
     >
       <div style={{ background: palette.ink, height: 74 }} />
-      <div style={{ fontFamily: fonts.sans, fontWeight: 900, fontSize: 300, letterSpacing: -10, lineHeight: 1.05, color: palette.ink }}>{big}</div>
+      <div style={{ fontFamily: fonts.sans, fontWeight: 900, fontSize: size, letterSpacing: -10, lineHeight: 1.05, color: palette.ink }}>{big}</div>
       <div style={{ ...mono(40, palette.grey), paddingBottom: 36 }}>{unit}</div>
     </div>
   );

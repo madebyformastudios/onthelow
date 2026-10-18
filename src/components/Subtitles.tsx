@@ -1,6 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import { fonts, palette, useSeries } from "../theme";
+import { fonts, palette, useSafe, useSeries } from "../theme";
 import { useEnter } from "../motion";
 
 export type Word = { w: string; start: number; end: number; accent?: boolean };
@@ -26,6 +26,7 @@ export const Subtitles: React.FC<Props> = ({ words, maxWords = 3, windows }) => 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { accent } = useSeries();
+  const safe = useSafe();
   const t = frame / fps;
 
   const chunks = React.useMemo(() => group(words, maxWords), [words, maxWords]);
@@ -43,8 +44,8 @@ export const Subtitles: React.FC<Props> = ({ words, maxWords = 3, windows }) => 
     <div
       style={{
         position: "absolute",
-        left: 60,
-        right: 60,
+        left: safe?.side ?? 60,
+        right: safe?.side ?? 60,
         bottom: 430,
         display: "flex",
         justifyContent: "center",

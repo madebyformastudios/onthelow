@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { fonts, palette, useSeries } from "../theme";
+import { fonts, palette, useSafe, useSeries } from "../theme";
 import { Pop } from "../motion";
 import { Change, valueAt } from "../format";
 import { BarRow } from "./Board";
@@ -25,7 +25,7 @@ export const VoteTag: React.FC<{ word: string }> = ({ word }) => {
 
 /** Counter that moves from `from` to `to` starting at `at` seconds (Layer-relative), e.g. a waitlist losing people. */
 export const Ticker: React.FC<{ label: string; from: number; to: number; at?: number; over?: number; top?: number }> = ({
-  label, from, to, at = 0, over = 1.5, top = 520,
+  label, from, to, at = 0, over = 1.5, top = 600,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -33,8 +33,9 @@ export const Ticker: React.FC<{ label: string; from: number; to: number; at?: nu
   const v = Math.round(valueAt(from, changes, frame / fps) ?? from);
   const down = to < from;
   const { accent } = useSeries();
+  const safe = useSafe();
   return (
-    <div style={{ position: "absolute", top, left: 60, right: 60 }}>
+    <div style={{ position: "absolute", top, left: safe?.side ?? 60, right: safe?.side ?? 60 }}>
       <Pop y={30}>
         <div style={{ background: "rgba(243,234,211,0.96)", borderRadius: 28, padding: "26px 40px", boxShadow: "0 14px 40px rgba(0,0,0,0.5)" }}>
           <div style={{ fontFamily: fonts.mono, fontWeight: 500, fontSize: 26, letterSpacing: 4, color: palette.grey }}>{label}</div>
@@ -48,8 +49,10 @@ export const Ticker: React.FC<{ label: string; from: number; to: number; at?: nu
 };
 
 /** Two bars on a cream panel over an illustration, e.g. days until someone ships. */
-export const VersusBars: React.FC<{ rows: { label: string; value: number; display: string; accent?: boolean }[]; max: number; top?: number }> = ({ rows, max, top = 520 }) => (
-  <div style={{ position: "absolute", top, left: 60, right: 60 }}>
+export const VersusBars: React.FC<{ rows: { label: string; value: number; display: string; accent?: boolean }[]; max: number; top?: number }> = ({ rows, max, top = 600 }) => {
+  const safe = useSafe();
+  return (
+  <div style={{ position: "absolute", top, left: safe?.side ?? 60, right: safe?.side ?? 60 }}>
     <Pop y={30}>
       <div style={{ background: "rgba(243,234,211,0.96)", borderRadius: 28, padding: "34px 40px 40px", boxShadow: "0 14px 40px rgba(0,0,0,0.5)", display: "flex", flexDirection: "column", gap: 28 }}>
         {rows.map((r, i) => (
@@ -59,3 +62,4 @@ export const VersusBars: React.FC<{ rows: { label: string; value: number; displa
     </Pop>
   </div>
 );
+};

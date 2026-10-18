@@ -1,9 +1,10 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { fonts, palette, useSeries } from "../theme";
+import { fonts, palette, useSafe, useSeries } from "../theme";
 import { Pop } from "../motion";
 
 const Frame: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const safe = useSafe();
   return (
     <AbsoluteFill
       style={{
@@ -11,7 +12,7 @@ const Frame: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "0 80px",
+        padding: safe ? `0 ${safe.rightBand}px 0 ${safe.side}px` : "0 80px",
         
       }}
     >
